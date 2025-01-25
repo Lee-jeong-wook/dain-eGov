@@ -47,5 +47,11 @@
 	
 	<bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
 	<bean id="defaultTraceHandler" class="org.egovframe.rte.fdl.cmmn.trace.handler.DefaultTraceHandler" />
+	
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="location" value="classpath:/egovframework/conf/globals.properties"/>
+    	<property name="ignoreUnresolvablePlaceholders" value="true"/>
+	</bean>
 	 
 </beans>

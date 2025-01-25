@@ -17,7 +17,13 @@
         <property name="username" value="sa"/>
     </bean>
     -->  
-    
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        
+		<property name="url" value="${globals.DBURL}" />
+        <property name="username" value="${globals.DBUSERNAME}"/>
+        <property name="password" value="${globals.PASSWORD}"/>
+    </bean>
     <!-- Mysql (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 ) 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
