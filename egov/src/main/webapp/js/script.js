@@ -18,25 +18,32 @@ const cube = new THREE.Mesh( geometry, material );
 const raycaster = new THREE.Raycaster();
 const mouse = THREE.Vector2;
 
-window.addEventListener('click', () =>
-    {
-        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(scene.children)
-        let regex = /[0-9]/g;
-        console.log(intersects[0].object.name);
-        if(intersects.length <= 0){
-            return;
-        } else if (intersects[0].object.parent.name.replaceAll(regex, "") === "컴퓨터") {
-            alert(intersects[0].object.parent.name);
-        } else if (intersects[0].object.name === "btn"){
-            intersects[0].object.material.color.set(0xdd0000)
-        }
-        // else if(){
-
-        // }
-    })
+window.addEventListener('click', (event) => {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(scene.children);
+    if (intersects.length <= 0) return;
+    let clickedObject = intersects[0].object;
+    let clickedName = clickedObject.name.replace(/\d+/g, "");
+    let parentName = clickedObject.parent ? clickedObject.parent.name.replace(/\d+/g, "") : "";
+    if (parentName === "컴퓨터") {
+        alert(clickedObject.parent.name);
+    } else if (clickedName === "btn") {
+        let num = clickedObject.name.match(/\d+/g);
+        num = num ? num.join("") : "";
+        const numArr = num.split("");
+        if(computer[numArr[0]][num[1]] == 1){
+			computer[numArr[0]][num[1]] = 0;
+			clickedObject.material.color.set(0x0000dd);
+		} else{
+			computer[numArr[0]][num[1]] =1;
+			clickedObject.material.color.set(0xdd0000);
+		}
+		console.log(computer);
+    }
+});
 const drawPart = (x, y, z) => {
     const group = new THREE.Group;
     group.name = "부품";
@@ -104,7 +111,6 @@ const drawComputer = (x, y, z, n) => {
     group.add(drawPart(x, y + 9, z));
     return group;
 }
-const computer = [[1,0,1],[0,1,0],[1,1,0],[1,0,0],[0,0,0]]
 for(let i = 0; i < computer.length; i++){
     for(let j = 0; j < computer[i].length; j++){
         if(computer[i][j] == 1){
@@ -135,7 +141,7 @@ const drawRoom = (x, y, z) => {
         for(let i = 0; i < computer.length; i++){
             for(let j = 0; j < computer[i].length; j++){
                 const btn = draw(x + 0.7 * j - 0.6, y + 0.8 * (computer.length - i) - 1.5, z + 0.3, 0.5, 0.5, 0.3, 0x0000dd, 1, 0);
-                btn.name = "btn";
+                btn.name = "btn" + i + "" + j;
                 if(computer[i][j] == 1){
                     btn.material.color.set(0xdd0000);
                 }
