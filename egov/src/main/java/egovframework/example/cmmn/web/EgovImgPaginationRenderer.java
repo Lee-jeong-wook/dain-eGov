@@ -15,10 +15,9 @@
  */
 package egovframework.example.cmmn.web;
 
-import org.egovframe.rte.ptl.mvc.tags.ui.pagination.AbstractPaginationRenderer;
-
 import javax.servlet.ServletContext;
 
+import org.egovframe.rte.ptl.mvc.tags.ui.pagination.AbstractPaginationRenderer;
 import org.springframework.web.context.ServletContextAware;
 
 /**

@@ -42,7 +42,19 @@ window.addEventListener('click', (event) => {
 			clickedObject.material.color.set(0xdd0000);
 		}
 		console.log(computer);
-    }
+    } else if (clickedName == "submit"){
+		console.log("hi");
+		fetch('/egov/updateComputer.do', {
+  		method: "POST",
+  		headers: {
+    		"Content-Type": "application/json",
+  		},
+  		body: JSON.stringify({
+    	id: id,
+    	computer: computer,
+  	}),
+	})
+}
 });
 const drawPart = (x, y, z) => {
     const group = new THREE.Group;

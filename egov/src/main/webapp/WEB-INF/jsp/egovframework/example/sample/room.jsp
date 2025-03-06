@@ -1,3 +1,4 @@
+<%@page import="egovframework.example.sample.service.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +21,11 @@
   </head>
   <body>
     <div id="app"></div>
-    <script type="text/javascript">const computer = [[1,0,1],[0,1,0],[1,1,0],[1,0,0],[0,0,0]]</script>
+<script type="text/javascript">
+	const id = "${vo.id}";
+	const computer = ${vo.computer};
+    console.log(computer);
+</script>
     <script type="module" src="./js/script.js"></script>
   </body>
   <script>
