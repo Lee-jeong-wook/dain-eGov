@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.example.sample.service.DainService;
 import egovframework.example.sample.service.MemberVO;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -30,7 +31,9 @@ public class dainController {
 		return "sample/ex";
 	}
 	@GetMapping(value = "/room.do")
-	public String showRoom() throws Exception{
+	public String showRoom(@RequestParam String id, Model model) throws Exception{
+		System.out.println("worked");
+		model.addAttribute("vo", dainService.getMember(id));
 		return "sample/room";
 	}
 	@GetMapping(value= "/login.do")
@@ -41,20 +44,27 @@ public class dainController {
 	public String signinPage() throws Exception{
 		return "sample/signup";
 	}
-	
-	@RequestMapping(value = "/getUser.do")
-	public String login(@RequestParam String id, @RequestParam String pw, Model model) {
-	    MemberVO vo = dainService.getMemberInfo(id, pw);
-	    model.addAttribute("vo", vo);
-	    return "sample/room";
+
+	@RequestMapping(value = "/updateComputer.do")
+	public String updateComputer(@RequestBody MemberVO vo, Model model, RedirectAttributes redirectAttributes) {
+		dainService.updateComputer(vo.getId(), vo.getComputer());
+		redirectAttributes.addAttribute("id", vo.getId());
+		return "redirect:/room.do";
 	}
 	
-	@RequestMapping(value = "/updateComputer.do")
-	public String login(@RequestBody MemberVO vo, Model model) {
+	@RequestMapping(value = "/getUser.do")
+	public String login(@RequestParam String id, @RequestParam String pw,RedirectAttributes redirectAttributes) {
+		MemberVO member = dainService.getMemberInfo(id, pw);
+		redirectAttributes.addAttribute("id", member.getId());
+		return "redirect:/room.do";
+	}
+	
+	@RequestMapping(value = "/login.do")
+	public String login(@RequestBody MemberVO vo, RedirectAttributes redirectAttributes) {
+		System.out.println("login");
 	    dainService.updateComputer(vo.getId(), vo.getComputer());
 	    MemberVO member = dainService.getMember(vo.getId());
-	    model.addAttribute("vo", member);
-	    System.out.println("work");
-	    return "sample/room";
+		redirectAttributes.addAttribute("id", member.getId());
+		return "redirect:/room.do";
 	}
 }

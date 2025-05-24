@@ -10,5 +10,8 @@
 	        </map>
 		</property>
 	</bean>
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/egovframework/conf/globals.properties"/>
+	</bean>
 	
-</beans>	
+</beans>

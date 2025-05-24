@@ -30,7 +30,7 @@
     </update>
     
     <select id="getMember" parameterType="String">
-        SELECT ID, COMPUTER FROM USERS WHERE ID = ${id}
+        SELECT ID, COMPUTER FROM USERS WHERE ID = #{id}
     </select>
 
 </mapper>

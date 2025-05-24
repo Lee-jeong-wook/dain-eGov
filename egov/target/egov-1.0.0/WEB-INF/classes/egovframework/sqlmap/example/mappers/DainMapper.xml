@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.example.sample.service.impl.DainMapper">
+
+    <!-- resultMap 정의 -->
+    <resultMap id="MemberResultMap" type="MemberVO">
+        <id property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="pw" column="PW"/>
+        <result property="computer" column="COMPUTER"/>
+    </resultMap>
+
+    <insert id="insertMember" parameterType="MemberVO">
+        INSERT INTO USERS (ID, NAME, PW, COMPUTER)
+        VALUES (#{id}, #{name}, #{pw}, #{computer})
+    </insert>
+
+    <select id="selectMemberById" parameterType="map" resultMap="MemberResultMap">
+        SELECT ID, NAME, PW, COMPUTER
+        FROM USERS
+        WHERE ID = #{id} AND PW = #{pw}
+    </select>
+
+    <!-- 회원의 COMPUTER 정보 업데이트 -->
+    <update id="updateComputer" parameterType="map">
+        UPDATE USERS
+        SET COMPUTER = #{computer}
+        WHERE ID = #{id}
+    </update>
+    
+    <select id="getMember" parameterType="String">
+        SELECT ID, COMPUTER FROM USERS WHERE ID = #{id}
+    </select>
+
+</mapper>
