@@ -4,7 +4,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 2000 );
 camera.position.set(0, 10, 40);
-console.log(camera);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -28,6 +27,7 @@ window.addEventListener('click', (event) => {
     let clickedObject = intersects[0].object;
     let clickedName = clickedObject.name.replace(/\d+/g, "");
     let parentName = clickedObject.parent ? clickedObject.parent.name.replace(/\d+/g, "") : "";
+    console.log(clickedName);
     if (parentName === "컴퓨터") {
         alert(clickedObject.parent.name);
     } else if (clickedName === "btn") {
@@ -43,17 +43,18 @@ window.addEventListener('click', (event) => {
 		}
 		console.log(computer);
     } else if (clickedName == "submit"){
-		console.log("hi");
-		fetch('/egov/updateComputer.do', {
-  		method: "POST",
-  		headers: {
-    		"Content-Type": "application/json",
-  		},
-  		body: JSON.stringify({
-    	id: id,
-    	computer: computer,
-  	}),
-	})
+		console.log(computer);
+		fetch('/egov_war/updateComputer.do', {
+            method: "POST",
+            headers: {
+                // "Content-Type": "application/json",
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                 id: id,
+                computer: computer,
+            }),
+        }).then(r => location.href=r.url);
 }
 });
 const drawPart = (x, y, z) => {

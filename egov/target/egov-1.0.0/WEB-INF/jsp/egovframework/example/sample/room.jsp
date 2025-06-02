@@ -26,7 +26,7 @@
 	const computer = ${vo.computer};
     console.log(computer);
 </script>
-    <script type="module" src="./js/script.js"></script>
+    <script type="module" src="./js/script.js?v=<%=System.currentTimeMillis() %>"></script>
   </body>
   <script>
     

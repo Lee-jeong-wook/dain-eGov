@@ -1,19 +1,17 @@
 package egovframework.example.sample.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import egovframework.example.sample.service.DainService;
 import egovframework.example.sample.service.MemberVO;
@@ -45,8 +43,14 @@ public class dainController {
 		return "sample/signup";
 	}
 
-	@RequestMapping(value = "/updateComputer.do")
-	public String updateComputer(@RequestBody MemberVO vo, Model model, RedirectAttributes redirectAttributes) {
+	static class Example {
+		String id;
+		List<List<Integer>> computer;
+	}
+
+	@PostMapping(value = "/updateComputer.do", consumes = {"application/json", "application/json;charset=UTF-8"})
+	public String updateComputer(@RequestBody MemberVO vo, RedirectAttributes redirectAttributes) {
+		System.out.println("hihi");
 		dainService.updateComputer(vo.getId(), vo.getComputer());
 		redirectAttributes.addAttribute("id", vo.getId());
 		return "redirect:/room.do";
