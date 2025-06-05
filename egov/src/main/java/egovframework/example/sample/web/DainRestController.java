@@ -26,7 +26,6 @@ public class DainRestController {
 
     @RequestMapping(value = "/login.do")
     public String login(@RequestBody MemberVO vo, RedirectAttributes redirectAttributes) {
-        System.out.println("login");
         dainService.updateComputer(vo.getId(), vo.getComputer());
         MemberVO member = dainService.getMember(vo.getId());
         redirectAttributes.addAttribute("id", member.getId());

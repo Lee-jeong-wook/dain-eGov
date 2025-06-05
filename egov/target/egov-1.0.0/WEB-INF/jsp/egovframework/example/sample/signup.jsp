@@ -1,31 +1,39 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사인업</title>
-    <link rel="stylesheet" href="styles.css">
+    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/style.css'/>"/>
+    <title>Document</title>
 </head>
 <body>
-    <div class="container">
-        <h2>사인업</h2>
-        <form action="SignupServlet" method="post">
-            <div class="input-group">
-                <label for="newUsername">아이디</label>
-                <input type="text" id="newUsername" name="newUsername" required>
+<div class="background">
+    <form action="getUser.do">
+        <div class="login-main-wrapper">
+            <div class="login-top-section">
+                <h2>회원가입</h2>
             </div>
-            <div class="input-group">
-                <label for="newPassword">비밀번호</label>
-                <input type="password" id="newPassword" name="newPassword" required>
+            <div class="login-main-section">
+                <div class="login-input login-id">
+                    <input type="text" id="username" name="id" required>
+                    <label for="pw" id="id-label">아이디</label>
+                </div>
+                <div class="login-input login-pw">
+                    <input type="text" id="pw" name="pw" required>
+                    <label for="pw" id="pw-label">비밀번호</label>
+                </div>
+                <a href="/egov_war/login.do">로그인</a>
             </div>
-            <div class="input-group">
-                <label for="confirmPassword">비밀번호 확인</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div class="login-bottom-section">
+                <button class="login-button">
+                    회원가입
+                </button>
             </div>
-            <button type="submit">사인업</button>
-            <p>이미 회원이신가요? <a href="login.jsp">로그인</a></p>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
 </body>
+<script type="module" src="./js/client.js"></script>
 </html>
