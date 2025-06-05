@@ -124,10 +124,11 @@ const drawComputer = (x, y, z, n) => {
     group.add(drawPart(x, y + 9, z));
     return group;
 }
+let number = 1;
 for(let i = 0; i < computer.length; i++){
     for(let j = 0; j < computer[i].length; j++){
         if(computer[i][j] == 1){
-            scene.add(drawComputer(-10 + j * 10, -2, i * 5 - 10, i + 1))
+            scene.add(drawComputer(-10 + j * 10, -2, i * 5 - 10, number++))
         }
     }
 }
