@@ -56,4 +56,15 @@ public class DainController {
 		redirectAttributes.addAttribute("id", member.getId());
 		return "redirect:/room.do";
 	}
+
+	@RequestMapping(value = "/addUser.do")
+	public String signup(@RequestParam String id, @RequestParam String pw, @RequestParam String name,RedirectAttributes redirectAttributes) {
+		try {
+			dainService.addMemberInfo(id, pw, "name", "[[0 ,0 ,0],[0 ,0 ,0],[0 ,0 ,0],[0 ,0 ,0]]");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "회원가입 중 오류가 발생하였습니다.");
+			return "redirect:/signup.do";
+		}
+		return "redirect:/login.do";
+	}
 }

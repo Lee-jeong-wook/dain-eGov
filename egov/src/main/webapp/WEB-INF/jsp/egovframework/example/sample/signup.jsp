@@ -10,19 +10,25 @@
 </head>
 <body>
 <div class="background">
-    <form action="getUser.do">
+    <form action="addUser.do">
         <div class="login-main-wrapper">
             <div class="login-top-section">
                 <h2>회원가입</h2>
             </div>
             <div class="login-main-section">
-                <div class="login-input login-id">
-                    <input type="text" id="username" name="id" required>
-                    <label for="pw" id="id-label">아이디</label>
-                </div>
-                <div class="login-input login-pw">
-                    <input type="text" id="pw" name="pw" required>
-                    <label for="pw" id="pw-label">비밀번호</label>
+                <div class="login-input-wrapper">
+                    <div class="login-input login-id">
+                        <input type="text" id="username" name="id" required>
+                        <label for="pw" id="id-label">아이디</label>
+                    </div>
+                    <div class="login-input login-pw">
+                        <input type="text" id="pw" name="pw" required>
+                        <label for="pw" id="pw-label">비밀번호</label>
+                    </div>
+                    <div class="login-input login-name">
+                        <input type="text" id="name" name="name" required>
+                        <label for="pw" id="name-label">이름</label>
+                    </div>
                 </div>
                 <a href="/egov_war/login.do">로그인</a>
             </div>

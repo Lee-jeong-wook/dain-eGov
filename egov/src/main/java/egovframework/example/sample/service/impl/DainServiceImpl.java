@@ -21,8 +21,7 @@ public class DainServiceImpl implements DainService{
 
 	@Override
 	public void addMemberInfo(String id, String pw, String name, String computer) {
-		// TODO Auto-generated method stub
-		
+		dainMapper.insertMember(new MemberVO(id, pw, name, computer));
 	}
 
 	@Override
