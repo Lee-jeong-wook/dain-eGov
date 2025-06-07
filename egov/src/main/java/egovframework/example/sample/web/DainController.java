@@ -15,15 +15,19 @@ public class DainController {
 	
 	@Autowired
 	private DainService dainService;
-	
-	@RequestMapping(value = "/home.do")
-	public String showExPage() throws Exception {
-		return "sample/ex";
-	}
+
 	@GetMapping(value = "/room.do")
-	public String showRoom(@RequestParam String id, Model model) throws Exception{
-		System.out.println("worked");
-		model.addAttribute("vo", dainService.getMember(id));
+	public String showRoom(@RequestParam(required = false) String id, Model model, RedirectAttributes redirectAttributes){
+		if(id == null || id.isEmpty()){
+			redirectAttributes.addFlashAttribute("error", "로그인 정보가 존재하지 않습니다.");
+			return "redirect:/login.do";
+		}
+		MemberVO vo = dainService.getMember(id);
+		if(vo == null){
+			redirectAttributes.addFlashAttribute("error", "존재하지 않는 사용자입니다.");
+			return "redirect:/login.do";
+		}
+		model.addAttribute("vo", vo);
 		return "sample/room";
 	}
 	@GetMapping(value= "/login.do")
