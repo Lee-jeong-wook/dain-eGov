@@ -9,6 +9,11 @@
     <title>Document</title>
 </head>
 <body>
+<c:if test="${not empty error}">
+    <script>
+        alert("${error}");
+    </script>
+</c:if>
 <div class="background">
     <form action="getUser.do">
         <div class="login-main-wrapper">

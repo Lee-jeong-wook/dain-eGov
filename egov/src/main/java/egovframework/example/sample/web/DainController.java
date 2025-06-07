@@ -45,14 +45,10 @@ public class DainController {
 	@RequestMapping(value = "/getUser.do")
 	public String login(@RequestParam String id, @RequestParam String pw, RedirectAttributes redirectAttributes) {
 		MemberVO member = dainService.getMemberInfo(id, pw);
-		redirectAttributes.addAttribute("id", member.getId());
-		return "redirect:/room.do";
-	}
-
-	@RequestMapping(value = "/login.do")
-	public String login(@RequestBody MemberVO vo, RedirectAttributes redirectAttributes) {
-		dainService.updateComputer(vo.getId(), vo.getComputer());
-		MemberVO member = dainService.getMember(vo.getId());
+		if (member == null) {
+			redirectAttributes.addFlashAttribute("error", "존재하지 않는 사용자입니다.");
+			return "redirect:/login.do";
+		}
 		redirectAttributes.addAttribute("id", member.getId());
 		return "redirect:/room.do";
 	}
