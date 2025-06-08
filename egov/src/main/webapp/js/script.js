@@ -51,7 +51,6 @@ window.addEventListener('click', (event) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                 id: id,
                 computer: computer,
             }),
         }).then(r => location.href=r.url);

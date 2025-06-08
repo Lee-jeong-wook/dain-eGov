@@ -32,6 +32,10 @@ public class MemberVO {
 		this.name = name;
 		this.computer = computer;
 	}
+	public MemberVO(String computer) {
+		this.computer = computer;
+	}
+
 
 	public List<List<Integer>> getComputerAsList() {
 		try {
