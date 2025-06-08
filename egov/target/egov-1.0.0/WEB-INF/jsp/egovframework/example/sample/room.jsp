@@ -78,7 +78,6 @@
 	const computer = ${vo.computer};
 
         const logout = () => {
-          alert("work");
           document.cookie = "id=; max-age=-1;";
           location.href = "login.do";
         };

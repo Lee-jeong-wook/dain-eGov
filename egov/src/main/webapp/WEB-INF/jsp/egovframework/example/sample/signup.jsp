@@ -22,7 +22,7 @@
                         <label for="pw" id="id-label">아이디</label>
                     </div>
                     <div class="login-input login-pw">
-                        <input type="text" id="pw" name="pw" required>
+                        <input id="pw" name="pw" type="password" required>
                         <label for="pw" id="pw-label">비밀번호</label>
                     </div>
                     <div class="login-input login-name">
