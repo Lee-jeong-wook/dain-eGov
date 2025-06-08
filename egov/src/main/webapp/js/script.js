@@ -8,7 +8,7 @@ camera.position.set(0, 10, 40);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
-document.body.appendChild( renderer.domElement );
+document.querySelector("#app").appendChild( renderer.domElement );
 
 const geometry = new THREE.BoxGeometry( 2, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
@@ -17,7 +17,8 @@ const cube = new THREE.Mesh( geometry, material );
 const raycaster = new THREE.Raycaster();
 const mouse = THREE.Vector2;
 
-window.addEventListener('click', (event) => {
+document.querySelector("#app").addEventListener('click', (event) => {
+
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     
@@ -169,4 +170,4 @@ function animate() {
 	renderer.render( scene, camera );
 
 }
-new OrbitControls(camera, document.body);
+new OrbitControls(camera, document.querySelector("#app"));
