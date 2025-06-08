@@ -23,8 +23,8 @@
             <div class="login-main-section">
                 <div class="login-input-wrapper">
                     <div class="login-input login-id">
-                        <input type="text" id="username" name="id" required>
-                        <label for="pw" id="id-label">아이디</label>
+                        <input type="text" id="id" name="id" required>
+                        <label for="id" id="id-label">아이디</label>
                     </div>
                     <div class="login-input login-pw">
                         <input id="pw" name="pw" type="password" required>
