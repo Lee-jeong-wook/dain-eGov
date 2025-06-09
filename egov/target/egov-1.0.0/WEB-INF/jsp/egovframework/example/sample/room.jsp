@@ -78,8 +78,12 @@
 	const computer = ${vo.computer};
 
         const logout = () => {
-          document.cookie = "id=; max-age=-1;";
-          location.href = "login.do";
+          if(confirm("로그아웃 하시겠습니까?")){
+            document.cookie = "id=; max-age=-1;";
+            location.href = "login.do";
+          }else{
+            return false;
+          }
         };
 </script>
     <script type="module" src="./js/script.js?v=<%=System.currentTimeMillis() %>"></script>

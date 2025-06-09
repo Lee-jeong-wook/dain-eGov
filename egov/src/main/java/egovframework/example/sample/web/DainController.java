@@ -1,5 +1,6 @@
 package egovframework.example.sample.web;
 
+import egovframework.example.sample.common.ErrorRedirect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +23,11 @@ public class DainController {
 	@GetMapping(value = "/room.do")
 	public String showRoom(@CookieValue(name = "id", required = false) String cookieId, Model model, RedirectAttributes redirectAttributes){
 		if(cookieId == null || cookieId.isEmpty()){
-			redirectAttributes.addFlashAttribute("error", "로그인 정보가 존재하지 않습니다.");
-			return "redirect:/login.do";
+			return ErrorRedirect.sendRedirectMessage("로그인 정보가 존재하지 않습니다.", "login.do", redirectAttributes);
 		}
 		MemberVO vo = dainService.getMember(cookieId);
 		if(vo == null){
-			redirectAttributes.addFlashAttribute("error", "존재하지 않는 사용자입니다.");
-			return "redirect:/login.do";
+			return ErrorRedirect.sendRedirectMessage("사용자 입력 정보가 잘못되었습니다.", "login.do", redirectAttributes);
 		}
 		model.addAttribute("vo", vo);
 		return "sample/room";
@@ -52,8 +51,7 @@ public class DainController {
 	public String login(@RequestParam String id, @RequestParam String pw, RedirectAttributes redirectAttributes, HttpServletResponse response) {
 		MemberVO member = dainService.getMemberInfo(id, pw);
 		if (member == null) {
-			redirectAttributes.addFlashAttribute("error", "존재하지 않는 사용자입니다.");
-			return "redirect:/login.do";
+			return ErrorRedirect.sendRedirectMessage("로그인 정보가 잘못되었습니다.", "login.do", redirectAttributes);
 		}
 		response.addCookie(new Cookie("id", member.getId()));
 		return "redirect:/room.do";
@@ -62,10 +60,9 @@ public class DainController {
 	@RequestMapping(value = "/addUser.do")
 	public String signup(@RequestParam String id, @RequestParam String pw, @RequestParam String name,RedirectAttributes redirectAttributes) {
 		try {
-			dainService.addMemberInfo(id, pw, "name", "[[0 ,0 ,0],[0 ,0 ,0],[0 ,0 ,0],[0 ,0 ,0]]");
+			dainService.addMemberInfo(id, pw, name, "[[0 ,0 ,0],[0 ,0 ,0],[0 ,0 ,0],[0 ,0 ,0]]");
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("error", "회원가입 중 오류가 발생하였습니다.");
-			return "redirect:/signup.do";
+			return ErrorRedirect.sendRedirectMessage("회원가입 중 오류가 발생하였습니다.", "signup.do", redirectAttributes);
 		}
 		return "redirect:/login.do";
 	}
